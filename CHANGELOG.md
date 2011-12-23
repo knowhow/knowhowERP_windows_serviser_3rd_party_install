@@ -1,3 +1,7 @@
+0.3.0  2011-12-23, hernad
+    
+  - syntax vim
+
 0.2.0  2011-12-23, hernad
 
   - vim ciscenje,  [#25348](http://redmine.bring.out.ba/issues/25348)
