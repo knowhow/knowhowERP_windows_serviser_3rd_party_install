@@ -1,7 +1,14 @@
 0.2.0  2011-12-23, hernad
 
-  - vim ciscenje
+  - vim ciscenje,  [#25348](http://redmine.bring.out.ba/issues/25348)
 
 0.1.0  2011-12-23, bjasko init
 
   - [#25788](http://redmine.bring.out.ba/issues/25788)
+
+--------------------
+
+Contributor(s):
+
+* bjasko - Jasmin Beganović, jasmin.beganovic@bring.out.ba
+* hernad - Ernad Husremović, ernad.husremovic@bring.out.ba
