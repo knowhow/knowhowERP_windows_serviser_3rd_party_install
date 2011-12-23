@@ -23,9 +23,9 @@ set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 
 syntax enable
-set background=dark
+" set background=dark
 " set background=light
-colorscheme solarized
+" colorscheme solarized
 
 " status line
 set laststatus=2
