@@ -1,3 +1,7 @@
+0.4.0  2011-12-23, bjasko 
+
+  - install bat 
+
 0.3.0  2011-12-23, hernad
     
   - syntax vim
