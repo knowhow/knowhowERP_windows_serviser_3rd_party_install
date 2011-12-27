@@ -1,4 +1,4 @@
-F18 Servisersko okruženje
+knowhowERP servisersko okruženje
 ===================
 
 howto:
