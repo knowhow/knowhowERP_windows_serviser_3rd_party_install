@@ -1,9 +1,7 @@
-0.4.0  2011-12-23, bjasko 
-
-  - install bat 
-
-0.3.0  2011-12-23, hernad
-    
+0.3.0  2011-12-288888888ernad, bjasko
+  
+  - rename > knowhow   
+  - install bat
   - syntax vim
 
 0.2.0  2011-12-23, hernad
