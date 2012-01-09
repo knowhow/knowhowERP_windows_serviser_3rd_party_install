@@ -1,7 +1,7 @@
-0.4.0 2012-01-09 hernad
-  
-  - qt koji ima smisla
-  - vim pokupiti
+0.4.4 2012-01-09 hernad
+
+  - [#25967](http://redmine.bring.out.ba/issues/25967)
+  - qt libs i utilitie knowhowERP_serviser.vim koji radi
 
 0.3.0 2011-12-28 bjasko
   
