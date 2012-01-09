@@ -24,7 +24,7 @@ xcopy  /Y /i /E util\include c:\knowhowERP\util\include
 
 cd util
 
-wget -N --no-check-certificate https://github.com/knowhow/knowhowERP_serviser_3rd_party_install/raw/master/vim/util/knowhowERP_serviser.vim
+wget -N --no-check-certificate https://github.com/knowhow/knowhowERP_serviser_3rd_party_install/raw/master/vim/knowhowERP_serviser.vim
 wget -N --no-check-certificate https://github.com/knowhow/FMK2F18/raw/master/FMK2F18.sh
 wget -N --no-check-certificate https://github.com/knowhow/FMK2F18/raw/master/FMK2F18_prepare.sh
 wget -N  http://knowhow-erp.googlecode.com/files/knowhowERP_Windows_package_updater_2.2.4.gz
