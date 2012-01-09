@@ -1,4 +1,9 @@
-0.3.0  2011-12-288888888ernad, bjasko
+0.4.0 2012-01-09 hernad
+  
+  - qt koji ima smisla
+  - vim pokupiti
+
+0.3.0 2011-12-28 bjasko
   
   - rename > knowhow   
   - install bat

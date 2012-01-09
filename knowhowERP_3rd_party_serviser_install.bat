@@ -10,7 +10,7 @@ echo.
 echo Pritisni Ctrl+C za prekid ili bilo koju tipku za nastavak...
 pause > nul
 
-set I_VER="0.2.0"
+set I_VER="0.4.0"
 set I_DATE="09.01.2012"
 
 echo "F18 serviser util install ver %I_VER%, %I_DATE%"
@@ -28,7 +28,7 @@ wget -N --no-check-certificate https://github.com/knowhow/knowhowERP_serviser_3r
 wget -N --no-check-certificate https://github.com/knowhow/FMK2F18/raw/master/FMK2F18.sh
 wget -N --no-check-certificate https://github.com/knowhow/FMK2F18/raw/master/FMK2F18_prepare.sh
 wget -N  http://knowhow-erp.googlecode.com/files/knowhowERP_Windows_package_updater_2.2.4.gz
-gzip -dN  knowhowERP_Windows_package_updater_2.2.4.gz
+gzip -fdN  knowhowERP_Windows_package_updater_2.2.4.gz
 
 cd ..
 
@@ -36,6 +36,10 @@ cd ..
 echo kopiram fajlove
 
 xcopy  /Y /i util\* c:\knowhowERP\util
+
+xcopy  /Y /i Qt\* c:\knowhowERP\Qt
+
+xcopy  /Y /i lib\* c:\knowhowERP\lib
 
 echo F18 3d_party set uspjesno instaliran
 pause

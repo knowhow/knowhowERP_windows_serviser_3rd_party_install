@@ -237,3 +237,5 @@ endfunc
 command! -nargs=1 FindIdent :call FindIdent("<args>")
 
 
+set fileencoding=utf-8
+set encoding=utf-8
