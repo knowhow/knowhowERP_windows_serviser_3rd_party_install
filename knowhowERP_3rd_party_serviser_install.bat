@@ -10,7 +10,7 @@ echo.
 echo Pritisni Ctrl+C za prekid ili bilo koju tipku za nastavak...
 pause > nul
 
-set I_VER="0.4.0"
+set I_VER="0.4.2"
 set I_DATE="09.01.2012"
 
 echo "F18 serviser util install ver %I_VER%, %I_DATE%"
@@ -24,7 +24,7 @@ xcopy  /Y /i /E util\include c:\knowhowERP\util\include
 
 cd util
 
-wget -N --no-check-certificate https://github.com/knowhow/knowhowERP_serviser_3rd_party_install/raw/master/vim/knowhowERP_serviser.vim
+wget -N --no-check-certificate https://github.com/knowhow/knowhowERP_windows_serviser_3rd_party_install/raw/master/vim/knowhowERP_serviser.vim
 wget -N --no-check-certificate https://github.com/knowhow/FMK2F18/raw/master/FMK2F18.sh
 wget -N --no-check-certificate https://github.com/knowhow/FMK2F18/raw/master/FMK2F18_prepare.sh
 wget -N  http://knowhow-erp.googlecode.com/files/knowhowERP_Windows_package_updater_2.2.4.gz
