@@ -1,5 +1,6 @@
-0.6.2 2012-01-12 hernad
+0.6.3 2012-01-12 hernad
 
+  - xcopy MinGW drugi bug
   - nije MingGW nego MinGW
   - /c/MinGW 4.6.1, browse_dbf (habrour_playground/qt/brow_qt.prg)
 
