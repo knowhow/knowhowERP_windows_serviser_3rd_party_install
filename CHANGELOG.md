@@ -1,5 +1,6 @@
-0.6.1 2012-01-12 hernad
+0.6.2 2012-01-12 hernad
 
+  - nije MingGW nego MinGW
   - /c/MinGW 4.6.1, browse_dbf (habrour_playground/qt/brow_qt.prg)
 
 0.5.1 2012-01-12 hernad

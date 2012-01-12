@@ -10,7 +10,7 @@ echo.
 echo Pritisni Ctrl+C za prekid ili bilo koju tipku za nastavak...
 pause > nul
 
-set I_VER="0.6.1"
+set I_VER="0.6.2"
 set I_DATE="12.01.2012"
 
 echo "F18 serviser util install ver %I_VER%, %I_DATE%"
@@ -18,7 +18,7 @@ echo "F18 serviser util install ver %I_VER%, %I_DATE%"
 rem install
 echo kopiram MinGW
 
-xcopy  /Y /i /s MinGW c:\MingGW
+xcopy  /Y /i /s MinGW c:\MinGW
 
 echo kupim util pakete ...
 
