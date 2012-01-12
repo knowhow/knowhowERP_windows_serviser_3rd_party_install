@@ -1,3 +1,7 @@
+0.5.1 2012-01-12 hernad
+
+  - hbout set_harbour_envars.sh
+
 0.5.0 2012-01-12 hernad
 
   - hbout - kompletan harbour sa hbqt i hbpgsql [#26143](http://redmine.bring.out.ba/issues/26143) 
