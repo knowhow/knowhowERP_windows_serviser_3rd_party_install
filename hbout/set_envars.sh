@@ -7,7 +7,7 @@ export HB_COMPILER=mingw
 
 HB_ROOT=/c/knowhowERP/hbout
 
-export PATH=$HB_ROOT/bin:/c/PostgreSQL/9.1/bin:$PATH
+export PATH=/c/knowhowERP/MinGW/bin:$HB_ROOT/bin:/c/PostgreSQL/9.1/bin:$PATH
 export HB_INC_INSTALL=$HB_ROOT/include
 export HB_LIB_INSTALL=$HB_ROOT/lib/win/mingw
 
