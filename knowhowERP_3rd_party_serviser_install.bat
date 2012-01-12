@@ -35,10 +35,10 @@ cd ..
 
 echo kopiram fajlove
 
-xcopy  /Y /i util\* c:\knowhowERP\util
-xcopy  /Y /i hbout\* c:\knowhowERP\hbout
+xcopy  /Y /i /s util\* c:\knowhowERP\util
+xcopy  /Y /i  /s hbout\* c:\knowhowERP\hbout
 
-xcopy  /Y /i Qt\* c:\knowhowERP\Qt
+xcopy  /Y /i /s Qt\* c:\knowhowERP\Qt
 
 xcopy  /Y /i lib\* c:\knowhowERP\lib
 
