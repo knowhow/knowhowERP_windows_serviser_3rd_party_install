@@ -1,3 +1,7 @@
+0.5.0 2012-01-12 hernad
+
+  - hbout - kompletan harbour sa hbqt i hbpgsql [#26143](http://redmine.bring.out.ba/issues/26143) 
+
 0.4.4 2012-01-09 hernad
 
   - [#25967](http://redmine.bring.out.ba/issues/25967)
