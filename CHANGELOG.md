@@ -1,3 +1,7 @@
+0.6.0 2012-01-12 hernad
+
+  - /c/knowhowERP/MinGW 4.6.1
+
 0.5.1 2012-01-12 hernad
 
   - hbout set_harbour_envars.sh
