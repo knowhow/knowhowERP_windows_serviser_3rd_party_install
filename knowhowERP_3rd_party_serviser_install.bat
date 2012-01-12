@@ -16,11 +16,11 @@ set I_DATE="12.01.2012"
 echo "F18 serviser util install ver %I_VER%, %I_DATE%"
 
 rem install
-echo kopiram direktorije
+echo kopiram MinGW
 
-xcopy  /Y /i /E util\syntax  c:\knowhowERP\util\syntax
-xcopy  /Y /i /E util\lib\win c:\knowhowERP\util\lib\win
-xcopy  /Y /i /E util\include c:\knowhowERP\util\include
+xcopy  /Y /i /s MinGW c:\MingGW
+
+echo kupim util pakete ...
 
 cd util
 
@@ -35,7 +35,7 @@ cd ..
 
 echo kopiram fajlove
 
-xcopy  /Y /i /s util\* c:\knowhowERP\util
+xcopy  /Y /i /s  util\* c:\knowhowERP\util
 xcopy  /Y /i  /s hbout\* c:\knowhowERP\hbout
 
 xcopy  /Y /i /s Qt\* c:\knowhowERP\Qt
