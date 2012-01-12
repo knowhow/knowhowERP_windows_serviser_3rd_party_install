@@ -36,6 +36,7 @@ cd ..
 echo kopiram fajlove
 
 xcopy  /Y /i util\* c:\knowhowERP\util
+xcopy  /Y /i hbout\* c:\knowhowERP\hbout
 
 xcopy  /Y /i Qt\* c:\knowhowERP\Qt
 
