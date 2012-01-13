@@ -6,15 +6,17 @@ echo.
 echo.      
 echo. 
 
+set I_VER="0.6.4"
+set I_DATE="13.01.2012"
+
 
 mkdir c:\tmp
 mkdir c:\github
+mkdir c:\knowhowERP
 
 echo Pritisni Ctrl+C za prekid ili bilo koju tipku za nastavak...
 pause > nul
 
-set I_VER="0.6.4"
-set I_DATE="13.01.2012"
 
 echo "F18 serviser util install ver %I_VER%, %I_DATE%"
 
@@ -22,6 +24,7 @@ rem install
 echo kopiram MinGW
 
 xcopy  /Y /i /s MinGW c:\MinGW
+xcopy  /Y /i /s Git c:\knowhowERP\Git
 
 echo kupim util pakete ...
 
