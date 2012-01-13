@@ -1,3 +1,7 @@
+0.6.5 2012-01-13 hernad
+   
+  - cp Git_knowhowERP.lnk
+
 0.6.4 2012-01-13 hernad
 
   - mkdir c:\tmp, c:\github, Git_knowhowERP.lnk

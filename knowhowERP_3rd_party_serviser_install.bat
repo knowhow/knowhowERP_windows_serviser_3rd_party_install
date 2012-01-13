@@ -6,7 +6,7 @@ echo.
 echo.      
 echo. 
 
-set I_VER="0.6.4"
+set I_VER="0.6.5"
 set I_DATE="13.01.2012"
 
 
