@@ -7,11 +7,14 @@ echo.
 echo. 
 
 
+mkdir c:\tmp
+mkdir c:\github
+
 echo Pritisni Ctrl+C za prekid ili bilo koju tipku za nastavak...
 pause > nul
 
-set I_VER="0.6.3"
-set I_DATE="12.01.2012"
+set I_VER="0.6.4"
+set I_DATE="13.01.2012"
 
 echo "F18 serviser util install ver %I_VER%, %I_DATE%"
 
@@ -42,6 +45,7 @@ xcopy  /Y /i /s Qt\* c:\knowhowERP\Qt
 
 xcopy  /Y /i lib\* c:\knowhowERP\lib
 
+copy Git_knowhowERP.lnk "%USERPROFILE%/Desktop"
 
 echo F18 3d_party set uspjesno instaliran
 pause

@@ -1,3 +1,7 @@
+0.6.4 2012-01-13 hernad
+
+  - mkdir c:\tmp, c:\github, Git_knowhowERP.lnk
+
 0.6.3 2012-01-12 hernad
 
   - xcopy MinGW drugi bug
