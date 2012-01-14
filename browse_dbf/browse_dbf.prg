@@ -10,9 +10,13 @@
  *
  */
 
+#include "fmk.ch"
+
 #include "hbqtgui.ch"
 #include "hbtrace.ch"
 #include "common.ch"
+
+#include "hbcompat.ch"
 
 static __main_params := {}
 
@@ -28,6 +32,17 @@ procedure Main(...)
  REQUEST HB_GT_XWC_DEFAULT
 
 #endif
+
+REQUEST DBFCDX
+
+RDDSETDEFAULT("DBFCDX")
+
+REQUEST HB_CODEPAGE_SL852 
+REQUEST HB_CODEPAGE_SLISO
+
+hb_setCodePage("SL852" )
+hb_setTermCP("SLISO")
+hb_CdpSelect("SL852")
 
 
 
