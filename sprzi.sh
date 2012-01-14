@@ -16,4 +16,4 @@ cp -av "knowhowERP package updater.lnk" "$BASE_DIR"/
 
 cp -av  *.md *.bat util hbout "$BASE_DIR"
 
-
+cp .bashrc "$BASEDIR"/.bashrc

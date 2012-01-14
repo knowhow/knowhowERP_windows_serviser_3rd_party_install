@@ -51,6 +51,9 @@ xcopy  /Y /i lib\* c:\knowhowERP\lib
 
 copy "*.lnk" "%USERPROFILE%/Desktop"
 
+copy ".bashrc" "%USERPROFILE%"
+
+
 echo F18 3d_party set uspjesno instaliran
 pause
 exit
