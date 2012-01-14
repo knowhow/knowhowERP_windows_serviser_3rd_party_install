@@ -13,7 +13,7 @@ export HB_LIB_INSTALL=$HB_ROOT/lib/win/mingw
 
 export HB_INSTALL_PREFIX=$HB_ROOT
 
-export HB_WITH_QT=c:\\Qt\\4.7.4\\include
+export HB_WITH_QT=c:\\knowhowERP\\Qt\\include
 export HB_WITH_PGSQL=c:\\PostgreSQL\\9.1\\include
 
 
