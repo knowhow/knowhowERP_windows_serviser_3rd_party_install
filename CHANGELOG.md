@@ -1,3 +1,7 @@
+0.6.6 2012-01-14 hernad
+ 
+  - knowhow package updater lnk
+
 0.6.5 2012-01-13 hernad
    
   - cp Git_knowhowERP.lnk
