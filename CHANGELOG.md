@@ -1,5 +1,6 @@
 0.7.0 2012-01-14 hernad
 
+  - [#26201](http://redmine.bring.out.ba/issues/26201)
   - browse_dbf.exe kako treba 
   - knowhow package updater lnk
 
