@@ -6,8 +6,8 @@ echo.
 echo.      
 echo. 
 
-set I_VER="0.6.5"
-set I_DATE="13.01.2012"
+set I_VER="0.6.6"
+set I_DATE="14.01.2012"
 
 
 mkdir c:\tmp
@@ -48,7 +48,7 @@ xcopy  /Y /i /s Qt\* c:\knowhowERP\Qt
 
 xcopy  /Y /i lib\* c:\knowhowERP\lib
 
-copy Git_knowhowERP.lnk "%USERPROFILE%/Desktop"
+copy "*.lnk" "%USERPROFILE%/Desktop"
 
 echo F18 3d_party set uspjesno instaliran
 pause
