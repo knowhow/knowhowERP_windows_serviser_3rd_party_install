@@ -1,3 +1,7 @@
+0.8.0 2012-01-14 hernad
+
+  - knowhowERP/Qt/lib (.a)
+
 0.7.0 2012-01-14 hernad
 
   - [#26201](http://redmine.bring.out.ba/issues/26201)

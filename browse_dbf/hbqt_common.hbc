@@ -17,7 +17,8 @@ plugins=hbmk2_qt.hbs
 {msvc}ldflags=-nodefaultlib:msvcrt.lib -defaultlib:libcmt.lib
 {beos}ldflags=-L/boot/common/lib
 
-{allwin|os2}libpaths=${HB_WITH_QT}\..\lib
+#{allwin|os2}libpaths=${HB_WITH_QT}\..\lib
+{allwin|os2}libpaths=c:\knowhowERP\Qt\lib
 
 {allgcc&!bsd}libs=supc++
 {allgcc&bsd}libs=stdc++
