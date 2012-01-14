@@ -1,3 +1,7 @@
+0.9.0 2012-01-14 hernad
+
+  - psql_backup.sh, psql_restore.sh
+
 0.8.0 2012-01-14 hernad
 
   - knowhowERP/Qt/lib (.a)
