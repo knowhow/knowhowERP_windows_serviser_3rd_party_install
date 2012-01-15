@@ -24,17 +24,16 @@ then
 fi
 
 
-#############################
 
-BCKPDIR=~/backup/psql_dump
-PSQLHOST="$1"
-PSQLUSER="$2"
-PSQLFILE="$4.sql"
-BACK_FILE="$4.tar.gz"
+B_DIR=~/backup/psql_dump
+B_FILE="$4.tar.gz"
 
-#############################
+SQL_HOST="$1"
+SQL_USER="$2"
+SQL_FILE="$4.sql"
 
-if ! [[ -d  "$BCKPDIR" ]]
+
+if ! [[ -d  "$B_DIR" ]]
 then
   echo kreiram ~/backup/pg_dump
   mkdir ~/backup
@@ -43,6 +42,8 @@ else
   echo lokacija ~/backup/pg_dump postoji
 fi
 
+read
+
 echo ~/backup/psql_dump/
 ls -l ~/backup/psql_dump/
 
@@ -50,29 +51,34 @@ echo --------------------------
 echo pritisni nesto za nastavak
 read
 
-if [ -d $BCKPDIR ]; then
-	echo "fajl $BCKPDIR/$BACK_FILE postoji"
-else 
-	mkdir -p $BCKPDIR 
+TAR_FILE="$B_DIR/$B_FILE"
+
+echo ""
+if ! [[ -f  $TAR_FILE ]]
+then
+  echo nema "$TAR_FILE !?"
+  exit 1
+else
+  echo "untarujem $TAR_FILE"
+  echo ""
 fi
- 
 
-echo ""
-echo "untarujem $BCKPDIR/$BACK_FILE"
-echo ""
+C_DIR=`pwd`
 
-CURDIR=`pwd`
-cd $BCKPDIR
-tar xvfz $BACK_FILE 
-cd "$CURDIR"
+cd $B_DIR
 
-echo " PSQL restore........unesi $PSQLUSER PWD:"
+tar xvfz $TAR_FILE
+
+cd ~
+
+echo " PSQL restore........unesi $SQL_USER PWD:"
 
 
-pg_restore --host $PSQLHOST --username $PSQLUSER -W --dbname="$3"  $BCKPDIR/$PSQLFILE 
+pg_restore --host $SQL_HOST --username $SQL_USER -W --dbname="$3"  "$SQL_FILE" 
 
 
-echo " Restore iz dumpa  $BACKFILE u $1 $3 zavrsen ........"
-rm $BCKPDIR/$PSQLFILE
+echo " Restore iz dumpa  $SQL_FILE u $1 $3 zavrsen ........"
+rm $SQL_FILE
+
 
 exit 0

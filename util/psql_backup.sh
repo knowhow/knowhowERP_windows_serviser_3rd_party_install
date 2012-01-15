@@ -1,10 +1,10 @@
 #!/bin/bash
 
-VER=0.7.0
+VER=0.1.0
 
-AUTHOR="bjasko@bring.out.ba, hernad@bring.out.ba" 
+AUTHOR="hernad@bring.out.ba" 
 
-DAT=14.01.2011
+DAT=15.01.2011
 
 echo $DAT, $VER, $AUTHOR
 
@@ -13,63 +13,77 @@ echo $DAT, $VER, $AUTHOR
 if [[ "$1" == "" || "$2" == "" || "$3" == "" || "$4" == "" ]]
 then
 
- echo "  usage: $0 [hostname] [username] [dbname]  [filename (bez tar.gz)]"
+ echo "  usage: $0 [hostname] [username] [dbname]  [filename (bez .gz)]"
  echo "example: $0 localhost admin bringout bring_2012-14-01"
- echo "         na lokaciji ~/backup/psql_dump/" 
- echo "         treba da se kreira bring_2012-14-01.tar.gz"
+ echo "         na lokaciji ~/.f18/backup" 
+ echo "         treba da se kreira bring_2012-14-01.gz"
 
  exit 1
 
 fi
 
 
-cd ~
-echo pozicioniram se HOME dir: `pwd`
 
-BCKPDIR="backup/psql_dump"
-PSQLHOST="$1"
-PSQLUSER="$2"
-PSQLFILE="$4.sql"
-BACK_FILE="$4.tar.gz"
-#############################
+B_DIR=~/.f18/backup
 
-echo ovo je prebaceno u serviserski toolset
+P_HOST="$1"
+P_USER="$2"
+P_DATABASE="$3"
+P_PORT=5432
+B_NAME="$4"
 
+DUMP_TMP="$TMP/$4.dump"
+GZIP_TMP="$TMP/$4.dump.gz"
+GZIP_OUT="$B_DIR/$4.dump.gz"
 
 echo ""
 echo "pravim dump"
 echo ""
 
-if [ -d $BCKPDIR ]; then
-	echo "dir postoji"
-else 
-	mkdir -p $BCKPDIR 
+if ! [[ -d "$B_DIR" ]]
+then
+	echo "kreiram $B_DIR"
+	mkdir -p "$B_DIR" 
+else
+    ls -l -h "$B_DIR"/*
 fi
  
 
+echo " PostgreSQL dump, kreiram $DUMP_TMP za database: $P_DATABASE ........ unesi $P_USER password:"
 
-cd $BCKPDIR
+CMD="pg_dump --host $P_HOST --port $P_PORT --username $P_USER --format custom --blobs --verbose  --file $DUMP_TMP  $P_DATABASE"
 
+pg_dump --host $P_HOST --port $P_PORT --username $P_USER --format custom --blobs --verbose  --file $DUMP_TMP  $P_DATABASE
 
-echo " PSQL dump........unesi $PSQLUSER PWD:"
+if [[ $? == 0 ]]
+then
+    echo " SQL dump zavrsen pakujem SQl dump ........"
 
-
-pg_dump --host $PSQLHOST --port 5432 --username $PSQLUSER --format custom --blobs --verbose  --file $PSQLFILE  $3
-
-
-echo " SQL dump zavrsen pakujem SQl dump ........"
-
-	tar cfvz $BACK_FILE $PSQLFILE
-	rm $PSQLFILE
-
-echo " Pakovanje zavrseno brisem SQl dump ........"
-
-echo " lista lokalnih backup-a........"
+    echo " "
+	gzip "$DUMP_TMP"
+	echo mv "$GZIP_TMP" "$GZIP_OUT"
+	mv "$GZIP_TMP" "$GZIP_OUT"
 
 
-	ls -lh 
+	ls -l -h "$GZIP_OUT"
 
+	if [[ $? != 0 ]]
+    then
+	    echo "nema $GZIP_OUT ??"
+	    exit 1
+	fi
 
+else
+   echo " "
+   echo " "
+   echo belaj ! neuspjesna komanda:
+   echo $CMD
+   exit 1
+fi
+
+echo " "
+echo "------------------------"
+echo "backup uspjesan :)"
+echo "------------------------"
+echo " "
 exit 0
-
-
