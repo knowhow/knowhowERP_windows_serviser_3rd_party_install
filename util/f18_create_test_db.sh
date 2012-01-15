@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER=1.0.5
+VER=1.1.0
 AUTHOR="hernad@bring.out.ba" 
 DAT=15.01.2012
 
