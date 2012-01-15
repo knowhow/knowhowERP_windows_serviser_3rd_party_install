@@ -1,6 +1,6 @@
-0.9.0 2012-01-14 hernad
+0.9.0 2012-01-15 hernad
 
-  - psql_backup.sh, psql_restore.sh
+  - f18_backup.sh, f18_restore.sh, f18_create_test_db.sh 
 
 0.8.0 2012-01-14 hernad
 
