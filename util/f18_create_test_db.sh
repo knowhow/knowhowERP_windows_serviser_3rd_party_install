@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER=1.0.1
+VER=1.0.5
 AUTHOR="hernad@bring.out.ba" 
 DAT=15.01.2012
 
@@ -66,9 +66,26 @@ fi
 }
 
 
-echo 1\) pretpostavljam postgres superuser ima password  \"admin\"
+echo "1) Prerequisites" 
+echo "-------------------------------------------------"
+echo " "
+echo "1.1) postgres superuser ima password  \"admin\""
 
 echo " "
+echo "1.2) backup dir $B_DIR"
+echo " "
+
+
+B_DIR=~/.f18/backup
+
+if ! [[ -d "$B_DIR" ]]
+then
+	echo "kreiram $B_DIR"
+	mkdir -p "$B_DIR" 
+else
+    ls -l -h "$B_DIR"/*
+fi
+
 
 echo 2\) kreiram testne usere i role na localhost-u
 
