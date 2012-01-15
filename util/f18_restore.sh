@@ -1,12 +1,10 @@
 #!/bin/bash
 
 
+VER=1.0.2
 
-VER=0.9.0
-
-AUTHOR="bjasko@bring.out.ba, hernad@bring.out.ba" 
-
-DAT=14.01.2011
+AUTHOR="hernad@bring.out.ba" 
+DAT=15.01.2011
 
 echo $DAT, $VER, $AUTHOR
 
@@ -14,71 +12,105 @@ echo $DAT, $VER, $AUTHOR
 if [[ "$1" == "" || "$2" == "" || "$3" == "" || "$4" == "" ]]
 then
 
- echo "  usage: $0 [hostname] [username] [dbname]  [filename (bez tar.gz)]"
+ echo "  usage: $0 [hostname] [username] [dbname]  [filename (bez dump.gz)]"
  echo "example: $0 localhost admin bringout bring_2012-14-01"
- echo "         na lokaciji ~/backup/psql_dump/" 
- echo "         treba da se nalazi bring_2012-14-01.tar.gz"
+ echo "         na lokaciji ~/.f18/backup" 
+ echo "         treba da se arhiva bring_2012-14-01.dump.gz"
 
  exit 1
 
 fi
 
 
+B_DIR=~/.f18/backup
 
-B_DIR=~/backup/psql_dump
-B_FILE="$4.tar.gz"
+P_HOST="$1"
+P_USER="$2"
+P_DATABASE="$3"
+P_PORT=5432
+B_NAME="$4"
 
-SQL_HOST="$1"
-SQL_USER="$2"
-SQL_FILE="$4.sql"
+DUMP_TMP="$TMP/$4.dump"
+GZIP_TMP="$TMP/$4.dump.gz"
+GZIP_BACKUP="$B_DIR/$4.dump.gz"
 
-
-if ! [[ -d  "$B_DIR" ]]
+if ! [[ -d "$B_DIR" ]]
 then
-  echo kreiram ~/backup/pg_dump
-  mkdir ~/backup
-  mkdir ~/backup/psql_dump
+	echo "kreiram $B_DIR"
+	mkdir -p "$B_DIR" 
 else
-  echo lokacija ~/backup/pg_dump postoji
+    ls -l -h "$B_DIR"/*
 fi
 
-read
-
-echo ~/backup/psql_dump/
-ls -l ~/backup/psql_dump/
-
-echo --------------------------
-echo pritisni nesto za nastavak
-read
-
-TAR_FILE="$B_DIR/$B_FILE"
 
 echo ""
-if ! [[ -f  $TAR_FILE ]]
+if ! [[ -f  $GZIP_BACKUP ]]
 then
-  echo nema "$TAR_FILE !?"
+ 
+  echo nema "$GZIP_BACKUP !?"
+  echo " "
+  echo "evo arhiva koje su raspolozive:"
+  echo "----------------------------------"
+  ls -l -h "$B_DIR"/*
+  echo "----------------------------------"
+
   exit 1
+
 else
-  echo "untarujem $TAR_FILE"
+  echo "koristim $GZIP_BACKUP"
   echo ""
 fi
 
 C_DIR=`pwd`
 
-cd $B_DIR
+echo " "
+cp -av "$GZIP_BACKUP" "$GZIP_TMP"
+gunzip -f "$GZIP_TMP"
 
-tar xvfz $TAR_FILE
+ls -l -h "$DUMP_TMP"
 
-cd ~
+if [[ $? != 0 ]]
+then
+    echo "nema $DUMP_TMP !?"
 
-echo " PSQL restore........unesi $SQL_USER PWD:"
+	exit 1
+fi
+
+echo ""
+echo "radim restore iz dumpa"
+echo ""
 
 
-pg_restore --host $SQL_HOST --username $SQL_USER -W --dbname="$3"  "$SQL_FILE" 
+echo "starting pg_restore ..."
 
 
-echo " Restore iz dumpa  $SQL_FILE u $1 $3 zavrsen ........"
-rm $SQL_FILE
+if [[ "PGPASSWORD" == "" ]]
+then
+    echo "unesi $P_USER password:"
+    PWD_SWITCH=" -W "
+else
+    PWD_SWITCH=""
+fi
 
 
+pg_restore --host $P_HOST --port $P_PORT --username $P_USER $PWD_SWITCH --dbname="$P_DATABASE" $DUMP_TMP
+
+if [[ $? == 0 ]]
+then
+    echo "database $P_DATABASE uspjesno vracen iz arhive"
+    echo " "
+else
+   echo " "
+   echo " "
+   echo belaj ! neuspjesna komanda:
+   echo $CMD
+   exit 1
+fi
+
+echo " "
+echo "------------------------"
+echo "restore uspjesan :)"
+echo "------------------------"
+echo " "
 exit 0
+

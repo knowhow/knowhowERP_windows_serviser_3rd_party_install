@@ -1,19 +1,16 @@
 #!/bin/bash
 
-VER=0.1.0
-
+VER=1.0.0
 AUTHOR="hernad@bring.out.ba" 
-
 DAT=15.01.2011
 
 echo $DAT, $VER, $AUTHOR
 
 
-
 if [[ "$1" == "" || "$2" == "" || "$3" == "" || "$4" == "" ]]
 then
 
- echo "  usage: $0 [hostname] [username] [dbname]  [filename (bez .gz)]"
+ echo "  usage: $0 [hostname] [username] [dbname]  [filename (bez .dump.gz)]"
  echo "example: $0 localhost admin bringout bring_2012-14-01"
  echo "         na lokaciji ~/.f18/backup" 
  echo "         treba da se kreira bring_2012-14-01.gz"
@@ -57,7 +54,7 @@ pg_dump --host $P_HOST --port $P_PORT --username $P_USER --format custom --blobs
 
 if [[ $? == 0 ]]
 then
-    echo " SQL dump zavrsen pakujem SQl dump ........"
+    echo "PostgreSQL dump uspjesno zavrsen. gzip-ujem dump ........"
 
     echo " "
 	gzip "$DUMP_TMP"
