@@ -1,10 +1,10 @@
 #!/bin/bash
 
 
-VER=1.0.3
+VER=1.0.2
 
 AUTHOR="hernad@bring.out.ba" 
-DAT=22.02.2012
+DAT=15.01.2011
 
 echo $DAT, $VER, $AUTHOR
 
@@ -50,7 +50,9 @@ then
   echo nema "$GZIP_BACKUP !?"
   echo " "
 
-elif ! [[ -f  $DUMP_TMP ]]
+fi
+
+if ! [[ -f  $DUMP_TMP ]]
 
 then 
  
