@@ -29,8 +29,8 @@ P_DATABASE="$3"
 P_PORT=5432
 B_NAME="$4"
 
-DUMP_TMP="$TMP/$4.dump"
-GZIP_TMP="$TMP/$4.dump.gz"
+DUMP_TMP="$B_DIR/$4.dump"
+GZIP_TMP="$B_DIR/$4.dump/"
 GZIP_OUT="$B_DIR/$4.dump.gz"
 
 echo ""
@@ -48,9 +48,9 @@ fi
 
 echo " PostgreSQL dump, kreiram $DUMP_TMP za database: $P_DATABASE ........ unesi $P_USER password:"
 
-CMD="pg_dump --host $P_HOST --port $P_PORT --username $P_USER --format custom --blobs --verbose  --file $DUMP_TMP  $P_DATABASE"
+CMD="pg_dump --host $P_HOST --port $P_PORT --username $P_USER -W  --format custom --blobs --verbose  --file $DUMP_TMP  $P_DATABASE"
 
-pg_dump --host $P_HOST --port $P_PORT --username $P_USER --format custom --blobs --verbose  --file $DUMP_TMP  $P_DATABASE
+pg_dump --host $P_HOST --port $P_PORT --username $P_USER -W --format custom --blobs --verbose  --file $DUMP_TMP  $P_DATABASE
 
 if [[ $? == 0 ]]
 then
