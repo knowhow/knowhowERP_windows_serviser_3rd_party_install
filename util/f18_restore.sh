@@ -1,10 +1,10 @@
 #!/bin/bash
 
 
-VER=1.0.2
+VER=1.0.3
 
 AUTHOR="hernad@bring.out.ba" 
-DAT=15.01.2011
+DAT=22.02.2012
 
 echo $DAT, $VER, $AUTHOR
 
