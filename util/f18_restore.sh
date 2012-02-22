@@ -30,8 +30,8 @@ P_DATABASE="$3"
 P_PORT=5432
 B_NAME="$4"
 
-DUMP_TMP="$TMP/$4.dump"
-GZIP_TMP="$TMP/$4.dump.gz"
+DUMP_TMP="$B_DIR/$4.dump"
+GZIP_TMP="$B_DIR/$4.dump.gz"
 GZIP_BACKUP="$B_DIR/$4.dump.gz"
 
 if ! [[ -d "$B_DIR" ]]
@@ -49,15 +49,18 @@ then
  
   echo nema "$GZIP_BACKUP !?"
   echo " "
-  echo "evo arhiva koje su raspolozive:"
-  echo "----------------------------------"
-  ls -l -h "$B_DIR"/*
-  echo "----------------------------------"
 
-  exit 1
+elif ! [[ -f  $DUMP_TMP ]]
+
+then 
+ 
+  echo nema ni "$DUMP_TMP !?"
+  echo " "
+ 
+exit 1
 
 else
-  echo "koristim $GZIP_BACKUP"
+  echo "koristim $GZIP_BACKUP tj $DUMP_TMP"
   echo ""
 fi
 
