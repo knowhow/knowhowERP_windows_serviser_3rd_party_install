@@ -1,3 +1,8 @@
+1.0.0 2012-02-28 hernad
+   
+   - [#26897](http://redmine.bring.out.ba/issues/26897)
+
+
 0.9.1 2012-01-15 hernad
 
   - f18_backup.sh, f18_restore.sh, f18_create_test_db.sh 
