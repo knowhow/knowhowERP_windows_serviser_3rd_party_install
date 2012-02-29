@@ -1,20 +1,20 @@
 @echo off
 echo ===========================================================================
-echo   Ovaj batch file instalira serviserske util lokaciju c:\knowhowERP\util
+echo  knowhowERP serviser/developer alati za Windows 32bit platformu 
 echo. 
 echo.     
 echo.      
 echo. 
 
-set ROOT_GCODE_URL="http://knowhow-erp.googlecode.com/files"
-set I_VER="0.1.0"
+set ROOT_GCODE_URL=http://knowhow-erp.googlecode.com/files
+set I_VER=0.1.0
 
-set I_DATE="29.02.2012"
+set I_DATE=29.02.2012
 
-set KH_UPDATER_VER="2.2.4"
-set HBOUT_VER="1.0"
-set MINGW_VER="1.0"
-set MINGW_MSYS_VER="1.0"
+set KH_UPDATER_VER=2.2.4
+set HBOUT_VER=1.0
+set MINGW_VER=1.0
+set MINGW_MSYS_VER=1.0
 
 mkdir c:\tmp
 mkdir c:\github
@@ -32,16 +32,16 @@ echo MinGW -> c:/MinGW
 
 mkdir MinGW
 
-TAR_F_NAME=MinGW_knohowhow_package_%MINGW_VER%.tar
-BZ2_FNAME=%F_NAME%.bz2
+set TAR_F_NAME=MinGW_knowhow_%MINGW_VER%.tar
+set BZ2_F_NAME=%TAR_F_NAME%.bz2
 
 wget -N  %ROOT_GCODE_URL%/%BZ2_F_NAME%
-echo "bunzip %BZ2_F_NAME%"
+echo "bunzip2 %BZ2_F_NAME%"
 bunzip2 %BZ2_F_NAME%
 echo "untar %TAR_F_NAME%
 tar xfv %TAR_F_NAME%
 echo "rm tar %TAR_F_NAME%
-rm %TAR_F_NAME%
+del %TAR_F_NAME%
 
 xcopy  /Y /i /s MinGW c:\MinGW
 
@@ -71,18 +71,20 @@ xcopy  /Y /i /s  util\* c:\knowhowERP\util
 
 
 
-mkdir hbout
+echo hbout -> c:/knowhowERP/hbout
 
-TAR_F_NAME=hbout_%MINGW_VER%.tar
-BZ2_FNAME=%F_NAME%.bz2
+rem mkdir hbout
+
+set TAR_F_NAME=hbout_%HBOUT_VER%.tar
+set BZ2_F_NAME=%TAR_F_NAME%.bz2
 
 wget -N  %ROOT_GCODE_URL%/%BZ2_F_NAME%
-echo "bunzip %BZ2_F_NAME%"
+echo "bunzip2 %BZ2_F_NAME%"
 bunzip2 %BZ2_F_NAME%
 echo "untar %TAR_F_NAME%
 tar xfv %TAR_F_NAME%
 echo "rm tar %TAR_F_NAME%
-rm %TAR_F_NAME%
+del %TAR_F_NAME%
 
 xcopy  /Y /i  /s hbout\* c:\knowhowERP\hbout
 
@@ -95,6 +97,6 @@ copy "*.lnk" "%USERPROFILE%/Desktop"
 copy ".bashrc" "%USERPROFILE%"
 
 
-echo F18 3d_party set uspjesno instaliran
+echo knowhowERP serviser/developer Windows 32bit set uspjesno instaliran
 pause
 exit
