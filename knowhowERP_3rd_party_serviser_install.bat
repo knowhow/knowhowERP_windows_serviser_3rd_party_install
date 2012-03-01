@@ -7,21 +7,24 @@ echo.
 echo.
 
 set ROOT_GCODE_URL=http://knowhow-erp.googlecode.com/files
-set ROOT_GCODE_URL=http://localhost:9292/files
-set I_VER=1.0.9
+rem set ROOT_GCODE_URL=http://localhost:9292/files
 
-set I_DATE=29.02.2012
+set I_VER=2.0.0
+
+set I_DATE=01.03.2012
 
 set KH_UPDATER_VER=2.2.4
 set HBOUT_VER=3.1
 set MINGW_VER=4.6.1
-set MINGW_MSYS_VER=1.0
+set MSYS_VER=4.6.1
 set QT_VER=4.7.4
 set GIT_VER=1.0
 
 set F_CUR_DIR=%CD%
 set CUR_DIR=%F_CUR_DIR:~2%
 set CUR_DRIVE=%F_CUR_DIR:~0,1%
+
+set WGET_CMD_1="%F_CUR_DIR%\wget" -N
 
 set TAR_CMD="%F_CUR_DIR%\tar" -x -v -f
 
@@ -46,76 +49,83 @@ goto :nista
 
 :pocetak
 
+echo Opcija = %opcija%
+
 mkdir c:\tmp
 mkdir c:\github
 mkdir c:\knowhowERP
+mkdir c:\knowhowERP\util
+mkdir c:\knowhowERP\lib
+mkdir c:\knowhowERP\bin
 
 echo " "
 echo "pocetak ...."
-goto :git
 
 :mingw1
 
-echo 1) MinGW -> c:/MinGW
 
+echo 1) MinGW -> c:/MinGW
 
 del  /Q c:\MinGW
 
 cd "%CUR_DIR%"
 
-set TAR_F_NAME=MinGW_knowhow_%MINGW_VER%.tar
-set BZ2_F_NAME=%TAR_F_NAME%.bz2
+set SEVENZ_F_NAME=MinGW_%MINGW_VER%.7z
 
-wget -N  %ROOT_GCODE_URL%/%BZ2_F_NAME%
-echo bunzip2 %BZ2_F_NAME%
-bunzip2 %BZ2_F_NAME%
-echo untar %TAR_F_NAME%
+%WGET_CMD_1%  %ROOT_GCODE_URL%/%SEVENZ_F_NAME%
+if NOT %ERRORLEVEL% == 0 goto :err_wget
 
-cd \
-%TAR_CMD% "%CUR_DIR%\%TAR_F_NAME%"
+echo 7zip extract %SEVENZ_F_NAME%
+
+cd c:\
+echo %SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
+%SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
 
 
 cd "%CUR_DIR%"
-echo rm tar %TAR_F_NAME%
-del %TAR_F_NAME%
+echo rm 7z %SEVENZ_F_NAME%
+del %SEVENZ_F_NAME%
+
+
+echo "Opcija za msys = %opcija%"
+
+if %opcija% == M goto :util 
+if %opcija% == m goto :util
+
+goto :msys
 
 
 
-if %opcija% == M goto :mingw2 
-if %opcija% == m goto :mingw2
 
 :msys
 
+
+echo 2) MinGW/msys -> c:/MinGW/msys
+
+
+del  /Q c:\MinGW\msys
+
 cd "%CUR_DIR%"
 
+set SEVENZ_F_NAME=MinGW_msys_%MSYS_VER%.7z
 
-del  /Q c:\MinGW\mys
+%WGET_CMD_1%  %ROOT_GCODE_URL%/%SEVENZ_F_NAME%
+if NOT %ERRORLEVEL% == 0 goto :err_wget
 
-echo 1.b) MinGW/msys -> c:/MinGW/msys
+echo 7zip extract %SEVENZ_F_NAME%
 
-set TAR_F_NAME=MinGW_msys_knowhow_%MINGW_MSYS_VER%.tar
-set BZ2_F_NAME=%TAR_F_NAME%.bz2
-
-wget -N  %ROOT_GCODE_URL%/%BZ2_F_NAME%
-echo bunzip2 %BZ2_F_NAME%
-bunzip2 %BZ2_F_NAME%
-
-echo untar %TAR_F_NAME%
 
 cd c:\MinGW
-%TAR_CMD% "%CUR_DIR%\%TAR_F_NAME%"
+echo %SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
+%SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
+
 
 cd "%CUR_DIR%"
-
-echo rm tar %TAR_F_NAME%
-del %TAR_F_NAME%
-
-cd "%CUR_DIR%"
+echo rm 7z %SEVENZ_F_NAME%
+del %SEVENZ_F_NAME%
 
 
-:mingw2
 
-rem xcopy  /Y /i /s MinGW c:\MinGW\
 
 :util
 
@@ -128,13 +138,14 @@ cd "%CUR_DIR%"
 
 cd util
 
-wget -N --no-check-certificate https://github.com/knowhow/knowhowERP_windows_serviser_3rd_party_install/raw/master/vim/knowhowERP_serviser.vim
-wget -N --no-check-certificate https://github.com/knowhow/FMK2F18/raw/master/FMK2F18.sh
-wget -N --no-check-certificate https://github.com/knowhow/FMK2F18/raw/master/FMK2F18_prepare.sh
+%WGET_CMD_1% --no-check-certificate https://github.com/knowhow/knowhowERP_windows_serviser_3rd_party_install/raw/master/vim/knowhowERP_serviser.vim
+%WGET_CMD_1% --no-check-certificate https://github.com/knowhow/FMK2F18/raw/master/FMK2F18.sh
+%WGET_CMD_1% --no-check-certificate https://github.com/knowhow/FMK2F18/raw/master/FMK2F18_prepare.sh
 
-wget -N %ROOT_GCODE_URL%/knowhowERP_Windows_package_updater_%KH_UPDATER_VER%.gz
+%WGET_CMD_1% %ROOT_GCODE_URL%/knowhowERP_Windows_package_updater_%KH_UPDATER_VER%.gz
 
 gzip -fdN  knowhowERP_Windows_package_updater_%KH_UPDATER_VER%.gz
+
 cd ..
 
 echo.
@@ -143,9 +154,11 @@ echo.
 echo ------------------------------------------------------------
 echo util => c:/knowhowERP/util
 
-xcopy  /Y /i /s  util\* c:\knowhowERP\util
+xcopy  /Y /i /s  util\* c:\knowhowERP\util\
+
 
 :hbout
+
 echo.
 echo.
 echo.
@@ -154,52 +167,50 @@ echo 2) harbour ver %HBOUT_VER% hbout -> c:/knowhowERP/hbout
 
 cd "%CUR_DIR%"
 
-set TAR_F_NAME=hbout_%HBOUT_VER%.tar
-set BZ2_F_NAME=%TAR_F_NAME%.bz2
-
-wget -N  %ROOT_GCODE_URL%/%BZ2_F_NAME%
-
-echo bunzip2 %BZ2_F_NAME%
-bunzip2 %BZ2_F_NAME%
-
-echo untar %TAR_F_NAME%
-
-cd c:\knowhowERP\
-%TAR_CMD% "%CUR_DIR%\%TAR_F_NAME%"
+del  /Q c:\knowhowERP\hbout
 
 cd "%CUR_DIR%"
 
+set SEVENZ_F_NAME=harbour_windows_%HBOUT_VER%.7z
 
-cd ""%CUR_DIR%""
-echo rm tar %TAR_F_NAME%
-del %TAR_F_NAME%
+%WGET_CMD_1%  %ROOT_GCODE_URL%/%SEVENZ_F_NAME%
+if NOT %ERRORLEVEL% == 0 goto :err_wget
 
-xcopy  /Y /i  /s hbout\* c:\knowhowERP\hbout
+echo 7zip extract %SEVENZ_F_NAME%
+
+cd c:\knowhowERP
+echo %SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
+%SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
+
+cd "%CUR_DIR%"
+echo rm 7z %SEVENZ_F_NAME%
+del %SEVENZ_F_NAME%
+
+xcopy  /Y /i  /s hbout\* c:\knowhowERP\hbout\
 
 :qt
 
 echo 3) Qt developer %QT_VER% -> c:/knowhowERP/Qt
 
-
 del  /Q c:\knowhowERP\Qt
 
 cd "%CUR_DIR%"
 
-set TAR_F_NAME=Qt_dev_windows_%QT_VER%.tar
-set BZ2_F_NAME=%TAR_F_NAME%.bz2
+set SEVENZ_F_NAME=Qt_dev_windows_%QT_VER%.7z
 
-wget -N  %ROOT_GCODE_URL%/%BZ2_F_NAME%
-echo bunzip2 %BZ2_F_NAME%
-bunzip2 %BZ2_F_NAME%
-echo untar %TAR_F_NAME%
+%WGET_CMD_1%  %ROOT_GCODE_URL%/%SEVENZ_F_NAME%
+if NOT %ERRORLEVEL% == 0 goto :err_wget
+
+echo 7zip extract %SEVENZ_F_NAME%
 
 cd c:\knowhowERP
-%TAR_CMD% "%CUR_DIR%\%TAR_F_NAME%"
-
+echo %SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
+%SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
 
 cd "%CUR_DIR%"
-echo rm tar %TAR_F_NAME%
-del %TAR_F_NAME%
+echo rm 7z %SEVENZ_F_NAME%
+del %SEVENZ_F_NAME%
+
 
 :git
 
@@ -211,17 +222,18 @@ cd "%CUR_DIR%"
 
 set SEVENZ_F_NAME=Git_windows_%GIT_VER%.7z
 
-wget -N  %ROOT_GCODE_URL%/%SEVENZ_F_NAME%
-echo 7zip extract %BZ2_F_NAME%
+%WGET_CMD_1%  %ROOT_GCODE_URL%/%SEVENZ_F_NAME%
+if NOT %ERRORLEVEL% == 0 goto :err_wget
+
+echo 7zip extract %SEVENZ_F_NAME%
 
 cd c:\knowhowERP
-%SEVENZ_CMD% %SEVENZ_F_NAME%
+echo %SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
+%SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
 
 cd "%CUR_DIR%"
 echo rm 7z %SEVENZ_F_NAME%
 del %SEVENZ_F_NAME%
-
-pause
 
 
 :lib
@@ -251,6 +263,15 @@ echo Vi se nalazite na disku %CUR_DRIVE%
 echo.
 echo lokacija %CD%
 echo.
+
+goto :nista
+
+
+:err_wget
+
+echo error wget %ROOT_GCODE_URL%/%SEVENZ_F_NAME% !
+echo .
+pause
 
 :nista
 

@@ -1,3 +1,7 @@
+2.0.0 2012-03-01 hernad
+
+   - sve eksterne arhive prebacene na 7zip
+
 1.0.0 2012-02-28 hernad
    
    - [#26897](http://redmine.bring.out.ba/issues/26897)
