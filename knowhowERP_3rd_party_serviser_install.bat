@@ -23,6 +23,9 @@ set F_CUR_DIR=%CD%
 set CUR_DIR=%F_CUR_DIR:~2%
 set CUR_DRIVE=%F_CUR_DIR:~0,1%
 
+set TAR_CMD="%F_CUR_DIR%\tar" -x -v -f
+
+set SEVENZ_CMD="%F_CUR_DIR%\7z" x
 
 echo F18 serviser util install ver %I_VER%, %I_DATE%
 echo -------------------------------------------------------
@@ -49,7 +52,7 @@ mkdir c:\knowhowERP
 
 echo " "
 echo "pocetak ...."
-
+goto :git
 
 :mingw1
 
@@ -69,7 +72,7 @@ bunzip2 %BZ2_F_NAME%
 echo untar %TAR_F_NAME%
 
 cd \
-tar -x -v -f "%CUR_DIR%\%TAR_F_NAME%"
+%TAR_CMD% "%CUR_DIR%\%TAR_F_NAME%"
 
 
 cd "%CUR_DIR%"
@@ -100,7 +103,7 @@ bunzip2 %BZ2_F_NAME%
 echo untar %TAR_F_NAME%
 
 cd c:\MinGW
-tar -x -v -f "%CUR_DIR%\%TAR_F_NAME%"
+%TAR_CMD% "%CUR_DIR%\%TAR_F_NAME%"
 
 cd "%CUR_DIR%"
 
@@ -162,7 +165,7 @@ bunzip2 %BZ2_F_NAME%
 echo untar %TAR_F_NAME%
 
 cd c:\knowhowERP\
-tar -x -v -f "%CUR_DIR%\%TAR_F_NAME%"
+%TAR_CMD% "%CUR_DIR%\%TAR_F_NAME%"
 
 cd "%CUR_DIR%"
 
@@ -191,7 +194,7 @@ bunzip2 %BZ2_F_NAME%
 echo untar %TAR_F_NAME%
 
 cd c:\knowhowERP
-tar -x -v -f "%CUR_DIR%\%TAR_F_NAME%"
+%TAR_CMD% "%CUR_DIR%\%TAR_F_NAME%"
 
 
 cd "%CUR_DIR%"
@@ -202,27 +205,23 @@ del %TAR_F_NAME%
 
 echo 4) Git windows %GIT_VER% -> c:/knowhowERP/Git
 
-
 del  /Q c:\knowhowERP\Git
 
 cd "%CUR_DIR%"
 
-set TAR_F_NAME=Git_windows_%GIT_VER%.tar
-set BZ2_F_NAME=%TAR_F_NAME%.bz2
+set SEVENZ_F_NAME=%TAR_F_NAME%.7z
 
-wget -N  %ROOT_GCODE_URL%/%BZ2_F_NAME%
-echo bunzip2 %BZ2_F_NAME%
-bunzip2 %BZ2_F_NAME%
-echo untar %TAR_F_NAME%
+wget -N  %ROOT_GCODE_URL%/%SEVENZ_F_NAME%
+echo 7zip extract %BZ2_F_NAME%
 
 cd c:\knowhowERP
-tar -x -v -f "%CUR_DIR%\%TAR_F_NAME%"
-
+%SEVENZ_CMD% %SEVENZ_F_NAME%
 
 cd "%CUR_DIR%"
-echo rm tar %TAR_F_NAME%
-del %TAR_F_NAME%
+echo rm 7z %SEVENZ_F_NAME%
+del %SEVENZ_F_NAME%
 
+pause
 
 
 :lib
