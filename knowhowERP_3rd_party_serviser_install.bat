@@ -209,7 +209,7 @@ del  /Q c:\knowhowERP\Git
 
 cd "%CUR_DIR%"
 
-set SEVENZ_F_NAME=%TAR_F_NAME%.7z
+set SEVENZ_F_NAME=Git_windows_%GIT_VER%.7z
 
 wget -N  %ROOT_GCODE_URL%/%SEVENZ_F_NAME%
 echo 7zip extract %BZ2_F_NAME%
