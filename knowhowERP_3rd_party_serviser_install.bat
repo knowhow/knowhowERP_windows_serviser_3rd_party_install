@@ -16,6 +16,8 @@ set KH_UPDATER_VER=2.2.4
 set HBOUT_VER=3.1
 set MINGW_VER=4.6.1
 set MINGW_MSYS_VER=1.0
+set QT_VER=4.7.4
+set GIT_VER=1.0
 
 set F_CUR_DIR=%CD%
 set CUR_DIR=%F_CUR_DIR:~2%
@@ -112,13 +114,11 @@ cd "%CUR_DIR%"
 
 rem xcopy  /Y /i /s MinGW c:\MinGW\
 
-echo .
-echo .
-echo .
-echo Git => c:/knowhowERP/Git
+:util
 
-xcopy  /Y /i /s Git c:\knowhowERP\Git
-
+echo .
+echo .
+echo ----------------------------------------------
 echo kupim util pakete ...
 
 cd "%CUR_DIR%"
@@ -147,7 +147,7 @@ echo.
 echo.
 echo.
 echo ------------------------------------------------------------
-echo hbout -> c:/knowhowERP/hbout
+echo 2) harbour ver %HBOUT_VER% hbout -> c:/knowhowERP/hbout
 
 cd "%CUR_DIR%"
 
@@ -173,10 +173,66 @@ del %TAR_F_NAME%
 
 xcopy  /Y /i  /s hbout\* c:\knowhowERP\hbout
 
+:qt
 
-xcopy  /Y /i /s Qt\* c:\knowhowERP\Qt
+echo 3) Qt developer %QT_VER% -> c:/knowhowERP/Qt
 
-xcopy  /Y /i lib\* c:\knowhowERP\lib
+
+del  /Q c:\knowhowERP\Qt
+
+cd "%CUR_DIR%"
+
+set TAR_F_NAME=Qt_dev_windows_%QT_VER%.tar
+set BZ2_F_NAME=%TAR_F_NAME%.bz2
+
+wget -N  %ROOT_GCODE_URL%/%BZ2_F_NAME%
+echo bunzip2 %BZ2_F_NAME%
+bunzip2 %BZ2_F_NAME%
+echo untar %TAR_F_NAME%
+
+cd c:\knowhowERP
+tar -x -v -f "%CUR_DIR%\%TAR_F_NAME%"
+
+
+cd "%CUR_DIR%"
+echo rm tar %TAR_F_NAME%
+del %TAR_F_NAME%
+
+:git
+
+echo 4) Git windows %GIT_VER% -> c:/knowhowERP/Git
+
+
+del  /Q c:\knowhowERP\Git
+
+cd "%CUR_DIR%"
+
+set TAR_F_NAME=Git_windows_%GIT_VER%.tar
+set BZ2_F_NAME=%TAR_F_NAME%.bz2
+
+wget -N  %ROOT_GCODE_URL%/%BZ2_F_NAME%
+echo bunzip2 %BZ2_F_NAME%
+bunzip2 %BZ2_F_NAME%
+echo untar %TAR_F_NAME%
+
+cd c:\knowhowERP
+tar -x -v -f "%CUR_DIR%\%TAR_F_NAME%"
+
+
+cd "%CUR_DIR%"
+echo rm tar %TAR_F_NAME%
+del %TAR_F_NAME%
+
+
+
+:lib
+
+echo "c:/knowhowERP/lib"
+ 
+xcopy  /Y /i lib\* c:\knowhowERP\lib\
+
+echo "Desktop links"
+echo.
 
 copy "*.lnk" "%USERPROFILE%/Desktop"
 
