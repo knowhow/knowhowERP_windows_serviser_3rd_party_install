@@ -9,7 +9,7 @@ echo.
 set ROOT_GCODE_URL=http://knowhow-erp.googlecode.com/files
 rem set ROOT_GCODE_URL=http://localhost:9292/files
 
-set I_VER=2.0.0
+set I_VER=2.1.0
 
 set I_DATE=01.03.2012
 
@@ -190,6 +190,8 @@ xcopy  /Y /i  /s hbout\* c:\knowhowERP\hbout\
 
 :qt
 
+:qt_dev
+
 echo 3) Qt developer %QT_VER% -> c:/knowhowERP/Qt
 
 del  /Q c:\knowhowERP\Qt
@@ -197,6 +199,28 @@ del  /Q c:\knowhowERP\Qt
 cd "%CUR_DIR%"
 
 set SEVENZ_F_NAME=Qt_dev_windows_%QT_VER%.7z
+
+%WGET_CMD_1%  %ROOT_GCODE_URL%/%SEVENZ_F_NAME%
+if NOT %ERRORLEVEL% == 0 goto :err_wget
+
+echo 7zip extract %SEVENZ_F_NAME%
+
+cd c:\knowhowERP
+echo %SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
+%SEVENZ_CMD% "%F_CUR_DIR%\%SEVENZ_F_NAME%"
+
+cd "%CUR_DIR%"
+echo rm 7z %SEVENZ_F_NAME%
+del %SEVENZ_F_NAME%
+
+:qt_dlls
+
+echo 3.b) Qt libs %QT_VER% -> c:/knowhowERP/lib
+
+
+cd "%CUR_DIR%"
+
+set SEVENZ_F_NAME=Qt_windows_dlls_%QT_VER%.7z
 
 %WGET_CMD_1%  %ROOT_GCODE_URL%/%SEVENZ_F_NAME%
 if NOT %ERRORLEVEL% == 0 goto :err_wget
