@@ -7,14 +7,19 @@ echo.
 echo.
 
 set ROOT_GCODE_URL=http://knowhow-erp.googlecode.com/files
+set ROOT_GCODE_URL=http://localhost:9292/files
 set I_VER=1.0.9
 
 set I_DATE=29.02.2012
 
 set KH_UPDATER_VER=2.2.4
 set HBOUT_VER=3.1
-set MINGW_VER=1.0
+set MINGW_VER=4.6.1
 set MINGW_MSYS_VER=1.0
+
+set F_CUR_DIR=%CD%
+set CUR_DIR=%F_CUR_DIR:~2%
+set CUR_DRIVE=%F_CUR_DIR:~0,1%
 
 
 echo F18 serviser util install ver %I_VER%, %I_DATE%
@@ -26,6 +31,7 @@ echo.
 echo Unesi zeljenu opciju + enter:
 set /p opcija=
 
+if NOT %CUR_DRIVE% == C goto :c_drive
 if %opcija% == M goto :pocetak 
 if %opcija% == m goto :pocetak 
 if %opcija% == f goto :pocetak 
@@ -47,7 +53,10 @@ echo "pocetak ...."
 
 echo 1) MinGW -> c:/MinGW
 
-mkdir MinGW
+
+del  /Q c:\MinGW
+
+cd "%CUR_DIR%"
 
 set TAR_F_NAME=MinGW_knowhow_%MINGW_VER%.tar
 set BZ2_F_NAME=%TAR_F_NAME%.bz2
@@ -56,9 +65,15 @@ wget -N  %ROOT_GCODE_URL%/%BZ2_F_NAME%
 echo bunzip2 %BZ2_F_NAME%
 bunzip2 %BZ2_F_NAME%
 echo untar %TAR_F_NAME%
-tar xfv %TAR_F_NAME%
+
+cd \
+tar -x -v -f "%CUR_DIR%\%TAR_F_NAME%"
+
+
+cd "%CUR_DIR%"
 echo rm tar %TAR_F_NAME%
 del %TAR_F_NAME%
+
 
 
 if %opcija% == M goto :mingw2 
@@ -66,7 +81,10 @@ if %opcija% == m goto :mingw2
 
 :msys
 
-cd MinGW
+cd "%CUR_DIR%"
+
+
+del  /Q c:\MinGW\mys
 
 echo 1.b) MinGW/msys -> c:/MinGW/msys
 
@@ -78,16 +96,21 @@ echo bunzip2 %BZ2_F_NAME%
 bunzip2 %BZ2_F_NAME%
 
 echo untar %TAR_F_NAME%
-tar xfv %TAR_F_NAME%
+
+cd c:\MinGW
+tar -x -v -f "%CUR_DIR%\%TAR_F_NAME%"
+
+cd "%CUR_DIR%"
 
 echo rm tar %TAR_F_NAME%
 del %TAR_F_NAME%
 
-cd ..
+cd "%CUR_DIR%"
+
 
 :mingw2
 
-xcopy  /Y /i /s MinGW c:\MinGW
+rem xcopy  /Y /i /s MinGW c:\MinGW\
 
 echo .
 echo .
@@ -97,6 +120,8 @@ echo Git => c:/knowhowERP/Git
 xcopy  /Y /i /s Git c:\knowhowERP\Git
 
 echo kupim util pakete ...
+
+cd "%CUR_DIR%"
 
 cd util
 
@@ -124,7 +149,7 @@ echo.
 echo ------------------------------------------------------------
 echo hbout -> c:/knowhowERP/hbout
 
-rem mkdir hbout
+cd "%CUR_DIR%"
 
 set TAR_F_NAME=hbout_%HBOUT_VER%.tar
 set BZ2_F_NAME=%TAR_F_NAME%.bz2
@@ -135,12 +160,19 @@ echo bunzip2 %BZ2_F_NAME%
 bunzip2 %BZ2_F_NAME%
 
 echo untar %TAR_F_NAME%
-tar xfv %TAR_F_NAME%
 
+cd c:\knowhowERP\
+tar -x -v -f "%CUR_DIR%\%TAR_F_NAME%"
+
+cd "%CUR_DIR%"
+
+
+cd ""%CUR_DIR%""
 echo rm tar %TAR_F_NAME%
 del %TAR_F_NAME%
 
 xcopy  /Y /i  /s hbout\* c:\knowhowERP\hbout
+
 
 xcopy  /Y /i /s Qt\* c:\knowhowERP\Qt
 
@@ -157,8 +189,15 @@ echo "bye bye ..."
 pause
 exit
 
+:c_drive
+
+echo Arhiva se mora nalaziti na C disku ! 
+echo Vi se nalazite na disku %CUR_DRIVE% 
+echo.
+echo lokacija %CD%
+echo.
+
 :nista
 
 echo instalacija nije izvrsena. bye bye ...
 pause
-
