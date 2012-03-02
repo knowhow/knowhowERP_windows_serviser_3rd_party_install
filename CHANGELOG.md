@@ -1,3 +1,7 @@
+2.2.1 2012-03-02 hernad
+    
+   - DOWNLOAD_DIR, wget -nc umjesto -N
+
 2.1.0 2012-03-01 hernad
 
    - Qt dlls eksterna arhiva
