@@ -9,9 +9,9 @@ echo.
 set ROOT_GCODE_URL=http://knowhow-erp.googlecode.com/files
 rem set ROOT_GCODE_URL=http://localhost:9292/files
 
-set I_VER=2.2.1
+set I_VER=2.2.2
 
-set I_DATE=02.03.2012
+set I_DATE=08.03.2012
 
 set KH_UPDATER_VER=2.2.4
 set HBOUT_VER=3.1
