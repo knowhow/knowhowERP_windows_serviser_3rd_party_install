@@ -23,3 +23,10 @@ export HB_DBG_PATH=$HB_DBG/common:$HB_DBG/pos:$HB_DBG/kalk:$HB_DBG/fin:$HB_DBG/f
 
 echo HB_DBG_PATH=$HB_DBG_PATH
 
+
+MSYS=`mount | grep -c MinGW.*msys`
+
+if [[ "$MSYS" != "0" ]]; then
+   export PATH=/c/MinGW/msys/1.0/bin:$PATH
+fi
+

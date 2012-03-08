@@ -8,4 +8,3 @@ echo " "
 echo " "
 
 source /c/knowhowERP/hbout/set_envars.sh
-

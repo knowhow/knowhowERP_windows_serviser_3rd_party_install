@@ -1,3 +1,8 @@
+2.2.2 2012-03-08 hernad
+ 
+   - path za msys hbout/set_envars.sh
+   - mount nije bio u Git-u, Git_windows_1.0.7z osvjezen na gcode
+
 2.2.1 2012-03-02 hernad
     
    - DOWNLOAD_DIR, wget -nc umjesto -N
